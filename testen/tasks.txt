@@ -1,0 +1,9 @@
+Kursseite vorbereiten,2018-06-01 10:00:00 +0200,2018-06-01 14:00:00 +0200,ruby2018
+Videos Woche 1 aufnehmen,2018-08-01 10:00:00 +0200,2018-08-01 11:00:00 +0200,ruby2018
+Bug beheben,2018-08-03 13:00:00 +0200,2018-08-03 17:00:00 +0200,openhpi
+Redesign der Emails,2018-08-06 10:00:00 +0200,2018-08-06 18:30:00 +0200,openhpi
+Teaser-Video schneiden,2018-08-28 09:00:00 +0200,2018-08-28 11:00:00 +0200,ruby2018
+Kurs-Announcement verschicken,2018-09-03 10:00:00 +0200,2018-09-03 10:10:00 +0200,ruby2018
+Hausaufgabe Woche 1 ausprobieren,2018-09-13 10:00:00 +0200,2018-09-13 14:00:00 +0200,ruby2018
+IRB-Video aufnehmen,2018-09-28 17:00:00 +0200,,ruby2018
+Neue Aufgabe,2018-10-20 19:10:07 +0200,,
