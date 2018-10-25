@@ -1,0 +1,8 @@
+Hausaufgaben erledigen,2018-09-18 22:30:00 +0200,,ruby2018
+Bug finden,2018-09-16 18:10:00 +0200,,openhpi ruby 2018
+Software installieren,2018-09-16 14:14:00 +0200,2018-09-17 16:02:00 +0200,openhpi
+Video aufnehmen,2018-09-20 12:00:00 +0200,2018-09-25 09:00:00 +0200,openhpi
+Büropflanze gießen,2018-02-05 09:30:00 +0200,,büro
+Dokumentation schreiben,2018-06-10 15:56:00 +0200,2018-08-28 21:20:00 +0200,entwicklung ruby2018
+Aufgabe bearbeiten,2018-10-23 12:39:09 +0200,,
+Aufgabe bearbeiten,2018-10-23 12:45:07 +0200,,Pruefung ruby2018,

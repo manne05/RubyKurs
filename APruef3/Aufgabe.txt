@@ -1,0 +1,85 @@
+ruby2018 - Abschlussprüfung Teil 3
+======================
+**Erweitere den Time-Tracker, um mehrere Tags zu speichern und um nach Tags zu filtern**
+
+Erweitere den Time-Tracker um die Fähigkeit, mehrere Tags pro Task speichern und laden zu können. Außerdem soll das `list`-Kommando erweitert werden, um nach bestimmten Tasks mit oder ohne Tags zu filtern. So sollen mit der Angabe `ruby tasks.rb list +a` nur Tasks mit dem Tag `a` aufgelistet werden. Mit der zusätzlichen Angabe `-b` sollen alle Tasks mit dem Tag `b` ausgeschlossen werden, also nur andere Tasks angezeigt werden. Die Such-Optionen sollen auch kombinierbar sein, z.B. `+a -b +c`, welches nur Tasks auflisten soll, die die Tags `a` *und* `c`, aber *nicht* `b` haben.
+
+### Aufgabe
+
+Die Aufgabe stellt den bekannten Time-Tracker bereit. Die einzelnen Klassen sind in mehreren Dateien im `lib`-Ordner aufgeteilt. Die neue Klasse `TimeTracker` implementiert die eigentlichen Kommandos: die schon bekannten `add`, `done` und `list`. Auch wurden einige Funktionen bereits mit Minitest getestet, entsprechende Test-Dateien befinden sich im `test`-Ordner. Diese können angepasst werden, um deinen Code und deine Änderungen zu testen. Die Minitest-Tests testen *nicht* die neuen Funktionen, die ihr implementieren müsst, sondern nur das Programm zu Beginn der Aufgabestellung. Die `tasks.txt` beinhaltet bereits mehrere Tags, diese werden im vorgegebenen Code aber noch wie ein einzelner Tag behandelt.
+
+Lies den existierenden Programmcode aufmerksam durch. Anschließend erweitere ihn um die folgenden Funktionalitäten:
+
+ 1. Erweitere `Task.parse`, um mehrere mit Leerzeichen getrennte Tags zu erkennen und als Liste zu speichern. Die Tags sollen über die Instanzmethode `Task#tags` abrufbar sein.
+ 1. Passe das Speichern von Tasks an, so dass mehrere Tags, mit je einem (1) Leerzeichen getrennt, in der Tasks-Datei gespeichert werden.
+ 1. Ändere die Ausgabe von `list`, so dass mehrere Tags mit Komma getrennt für jeden Task ausgegeben werden.
+ 1. Ergänze das `list`-Kommando, um nach Tags zu filtern: 
+    * Mit `+tag_name` sollen *nur* Tasks ausgegeben werden, die den Tag `tag_name` haben.
+    * Mit `-tag_name` sollen Tasks mit dem Tag `tag_name` von der Auflistung *ausgeschlossen* werden.
+    * Mehrere Optionen sollen kumulativ anwendbar sein, z.B. `+a +b`, `+a -c`, `-a -b`.
+
+### Beispiele
+
+So soll die Verwendung *nach* den Anpassungen aussehen. Maßgebend hier ist die originale `tasks.txt`.
+
+Ein normales `list` ohne Filter soll weiterhin alle Aufgaben auflisten, zuerst die noch offenen, anschließend die geschlossenen. Tags sollen mit Komma getrennt angegeben werden, so wie hier dargestellt:
+
+    > ruby tasks.rb list
+    Noch 3 offene Aufgabe(n):
+    
+    OFFEN seit 2018-02-05 09:30:00 +0200: Büropflanze gießen (büro)
+    OFFEN seit 2018-09-16 18:10:00 +0200: Bug finden (openhpi, entwicklung)
+    OFFEN seit 2018-09-18 22:30:00 +0200: Hausaufgaben erledigen (ruby2018, openhpi)
+    
+    Fertig seit 2018-09-25 09:00:00 +0200: Video aufnehmen (openhpi, ruby2018)
+    Fertig seit 2018-09-17 16:02:00 +0200: Software installieren (openhpi, entwicklung)
+    Fertig seit 2018-08-28 21:20:00 +0200: Dokumentation schreiben (entwicklung, hobby)
+
+Mit einem Filter `+openhpi` sollen nur noch Aufgaben mit dem Tag `openhpi` angezeigt werden:
+
+    > ruby tasks.rb list +openhpi
+    Noch 2 offene Aufgabe(n):
+    
+    OFFEN seit 2018-09-16 18:10:00 +0200: Bug finden (openhpi, entwicklung)
+    OFFEN seit 2018-09-18 22:30:00 +0200: Hausaufgaben erledigen (ruby2018, openhpi)
+    
+    Fertig seit 2018-09-25 09:00:00 +0200: Video aufnehmen (openhpi, ruby2018)
+    Fertig seit 2018-09-17 16:02:00 +0200: Software installieren (openhpi, entwicklung)
+
+Wenn ein Minus-Filter angegeben ist, dann sollen passende Aufgaben *nicht* aufgelistet werden:
+
+    > ruby tasks.rb list -openhpi
+    Noch 1 offene Aufgabe(n):
+    
+    OFFEN seit 2018-02-05 09:30:00 +0200: Büropflanze gießen (büro)
+    
+    Fertig seit 2018-08-28 21:20:00 +0200: Dokumentation schreiben (entwicklung, hobby)
+
+Mehrere Filter sollen anwendbar sein und logisch mit `und` verknüpft werden. So sollen z.B. bei `+openhpi +entwicklung` nur Aufgaben mit beiden Tags angezeigt werden:
+
+    > ruby tasks.rb list +openhpi +entwicklung
+    Keine offenen Aufgaben.
+    
+    Fertig seit 2018-09-17 16:02:00 +0200: Software installieren (openhpi, entwicklung)
+
+Ähnlich sollen bei `+openhpi -ruby2018` keine OpenHPI-Aufgaben zum Ruby-Kurs angezeigt werden:
+
+    > ruby tasks.rb list +openhpi -ruby2018
+    Noch 1 offene Aufgabe(n):
+    
+    OFFEN seit 2018-09-16 18:10:00 +0200: Bug finden (openhpi, entwicklung)
+    
+    Fertig seit 2018-09-17 16:02:00 +0200: Software installieren (openhpi, entwicklung)
+
+**Hinweise:**
+
+* Bei ungültigen Filtern, z.B. ohne `+` oder `-`, kann ein Fehler ausgegeben werden, oder der Filter ignoriert werden.
+*
+
+### Tipp
+
+**Der Knopf "Ausführen" führt die `tasks.rb` ohne weitere Kommandozeilenargumente aus. Nutze stattdessen "Bewerten", um die automatisierten Tests auszuführen.** Diese testen deinen Code, ob dieser die Aufgabenstellung erfüllt und geben dir Hinweise, was noch zu erledigen ist. Alternativ kannst du die vorgegebenen Minitest-Tests anpassen und selbst ausführen.
+
+* **Lies dir die Aufgabenstellung und die Beispiele aufmerksam durch.** Schau dir auch den existierenden Code an und überlege, welche Methoden du wiederverwenden kannst oder nur anpassen musst.
+* Du kannst eigene Tests in den Test-Dateien ergänzen und diese mit einem Klick auf den "Testen"-Knopf ausführen. Du siehst dann die Ausgabe des ausgewählten Tests.
+* Du kannst das Projekt auch herunterladen ("Herunterladen"-Knopf unter der Dateiliste) und lokal auf deinem System weiterentwickeln. Die Minitest-Tests kannst du mit `ruby -I lib test/*` ausführen, wenn du das `minitest`-Gem installiert hast.
